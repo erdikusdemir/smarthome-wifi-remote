@@ -15,5 +15,5 @@ Hardware is consist of;
 6. 3D printed enclosure
 
 In this project I connect remote controller to my Home Assistant (HA). 
-Remote controller communicates with Node-Red flow by MQTT Json messages. Node-Red flow converts the messages from both remote and HA side and make implementation easier.
+Remote controller communicates with Node-Red flow by MQTT Json messages. Node-Red flow converts the messages from both remote and HA side and makes implementation easier.
 Json messages contains 3 messages. 1. ID number of the item 2. state of item (on/off) 3. "slider" of item if it is dimmable. 
