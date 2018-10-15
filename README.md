@@ -6,7 +6,7 @@ Sorry for poorly compiled description. I will update and make it easy to underst
 DESCRIPTION 
 
 Portable remote controler to control smart home devices over MQTT protocol.
-Hardware is consist of
+Hardware is consist of;
 1. Wemos D1 mini
 2. Clickable rotary encoder
 3. 0.96" I2C 128x64 OLED display
