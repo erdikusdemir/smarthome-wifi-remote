@@ -29,7 +29,7 @@ Battery level check and light sleep are not implemented yet.
 ROTARY_PIN1  D6,  
 ROTARY_PIN2 D7,  
 BUTTON_PIN  D3,  
-2.Connect your I2C LCD to HW I2C port, 
+2.Connect your I2C LCD to HW I2C port,  
 3.Open the arduino sketch and update your wifi and mqtt server informations,  
 4.Copy the libraries to documents/arduino folder,  
 5.Copy NodeRed flow into your NodeRed server,  
