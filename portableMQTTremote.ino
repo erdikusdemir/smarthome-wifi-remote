@@ -5,7 +5,7 @@
 * Please update the your wifi and mqtt settings and check pin numbers for encoder.
 * Please note that code uses I2C display
 * 
-* Copyright (c) 2018 Erdi Kusdemir erdikusdemir@gmail.com
+* Copyright (c) 2018 Erdi Kuşdemir erdikusdemir@gmail.com
 *
 * MIT License
 *
