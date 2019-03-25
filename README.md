@@ -2,7 +2,7 @@
 
 ESP8266 based portable remote controller with OLED LCD for smart home implementation.
 
-Sorry for poorly compiled description. I will update and make it easy to understandable.
+Sorry for poorly compiled description. I will update and make it easy to understand.  
 
 # DESCRIPTION 
 
@@ -16,13 +16,12 @@ Hardware is consist of;
 2. Clickable rotary encoder,
 3. 0.96" I2C 128x64 OLED display,
 4. Wemos battery shield,
-5. LIPO battery (under progress),
+5. LIPO battery,
 6. 3D printed enclosure (under progress),
 
 # Limitations:  
-Only 4 items fit in screen. Page system will come soon.  
-Temperature controlling is possible but not configured yet.  
-Battery level check and light sleep are not implemented yet.
+Number of item is fixed to 20 because of code restirictions. It can be changed inside the arduino code.  
+Temperature controlling is possible but not configured yet.
 
 # Instructions:  
 1.Connect your encoder pins as:  
