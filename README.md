@@ -27,7 +27,7 @@ The number of an item is fixed to 20 because of code restrictions. It can be cha
 Temperature controlling is possible but not configured yet.
 
 # Instructions:  
-1.Connect your encoder pins as:  
+1. Connect your encoder pins as:  
 ROTARY_PIN1  D6,  
 ROTARY_PIN2 D7,  
 BUTTON_PIN  D3,  
