@@ -32,7 +32,7 @@ BUTTON_PIN  D3,
 2. Connect your I2C LCD to HW I2C port,  
 3.1. Open the Arduino sketch and update your wifi and MQTT server information,  
 3.2. Copy the libraries to documents/Arduino folder,  
-4.1.Copy NodeRed flow into your NodeRed server,  
+4.1. Copy NodeRed flow into your NodeRed server,  
 4.2. Configure your HA and MQTT servers,  
 4.3. Configure your items by editing "config file" function,  
 (id: order in your OLED screen, HAid: id name of item you want to control, svalid: is item dimmable?)  
