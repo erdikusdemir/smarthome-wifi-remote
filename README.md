@@ -1,13 +1,11 @@
 
-# portableMQTTremote
 
-ESP8266 based portable remote controller with OLED LCD for smart home implementation.
 
 Sorry for poorly compiled description. I will update and make it easy to understand.  
 
 # DESCRIPTION 
 
-Portable remote controller to control smart home devices over MQTT protocol.
+Portable remote controller to control smart home devices over MQTT protocol. It is based on ESP8266 with OLED LCD and rotary encoder.
 
 The remote controller communicates with Node-Red flow by MQTT JSON messages. Node-Red flow converts the signals from both remote and HA side and makes implementation easier. Items you would like to control by remote can be edited by "config file" function. Arduino sketch only configures Wifi and MQTT settings. All the item information are called at the initialization stage of the remote.
 JSON messages contain 3 messages. 1. The ID number of the item 2. state of the item (on/off) 3. "slider" of the item if it is dimmable. 
