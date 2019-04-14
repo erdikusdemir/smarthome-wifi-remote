@@ -20,6 +20,10 @@ Hardware is consist of;
 5. LIPO battery,
 6. 3D printed enclosure (under progress),
 
+<img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/remote_sizing.jpg" width="400">
+<img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/remote_extended.jpg" width="400">
+<img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/remote_wemos.jpg" width="400">
+
 # Limitations:  
 The number of an item is fixed to 20 because of code restrictions. It can be changed inside the Arduino code.  
 Temperature controlling is possible but not configured yet.
