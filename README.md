@@ -13,7 +13,7 @@ JSON messages contain 3 messages. 1. The ID number of the item 2. state of the i
 Wemos chip falls in a deep sleep to reduce power consumption after 30 seconds of idle. Reset switch needs to be pressed to awaken the board again.
 
 Hardware is consist of;
-1. Wemos D1 mini,
+1. Wemos D1 mini Pro,
 2. A clickable rotary encoder,
 3. 0.96" I2C 128x64 OLED display,
 4. Wemos battery shield,
