@@ -112,6 +112,10 @@ client.subscribe(inTopic);
 Serial.print("failed, rc=");
 Serial.print(client.state());
 Serial.println(" try again in 5 seconds");
+display.setCursor(0,0);//cursor
+display.println("MQTT connection failed.");
+display.display();
+display.clearDisplay();
 delay(5000);
     }
 
@@ -154,7 +158,7 @@ outputchanged=0;
 void loop() { //--------------------------------------------------void loop--------------------
 while (!client.connected()){
   reconnect();
-  initdata();
+if(client.connected()) initdata();
   }
 client.loop();
 encbtn.loop();
