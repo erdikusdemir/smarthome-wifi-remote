@@ -14,15 +14,19 @@ extern "C" {
 #include "Button2.h";
 
 // Update these with values suitable for your network.
-
+const char* deviceName = "remote1";// if more than 1 remote is exist, change the client id.
 const char* ssid = "wifi ssid";
 const char* password = "wifi password";
 const char* mqtt_server = "mqtt server ip";
-const char* mqtt_clientid = "remote1"; // if more than 1 remote is exist, change the client id.
+const char* mqtt_clientid = deviceName; 
 const char* mqtt_username = "mqtt server username";
 const char* mqtt_password = "mqtt server password";
 const char* outTopic = "kumanda1/in";
 const char* inTopic = "kumanda1/out";
+IPAddress ip(192, 168, 1, 11); //IP Address for remote //static IP is used for faster connection.
+IPAddress gateway(192, 168, 1, 1);   //IP Address of your WiFi Router (Gateway)
+IPAddress subnet(255, 255, 255, 0);  //Subnet mask
+IPAddress dns(192, 168, 1, 1);  //DNS
 
 #define PIN_A D6    //ky-040 clk pin, interrupt, add 100nF/0.1uF capacitors between pin & ground
 #define PIN_B D7    //ky-040 dt  pin,            add 100nF/0.1uF capacitors between pin & ground
@@ -60,16 +64,31 @@ long sleeper=0;
 boolean lastreflesh = 0;
 int page=0;
 int maxscan=3;
-long batcheck=0;
 boolean outputchanged=0;
 boolean ssaver = 0;
+long basla=0;
+
+void batlevel(){
+float raw = analogRead(A0);
+if(raw<=735){ // if bat is low display message
+display.setCursor(0,0);
+display.println("Battery is LOW");
+display.display();
+  }//end if 
+//String payload = "{\"bat\": "+ String(raw) + "}";
+//payload.toCharArray(data2, (payload.length() + 1));
+//client.publish( "kumanda1/bat", data2);
+} //end of batlevel
 
 void setup() {
+basla=millis();
+Serial.begin(115200);
+WiFi.mode(WIFI_STA);
+WiFi.hostname(deviceName);
+WiFi.config(ip, subnet, gateway, dns);
+WiFi.begin(ssid, password);
 pinMode(PIN_A,INPUT_PULLUP); //enable internal pull-up resistors 
 pinMode(PIN_B,INPUT_PULLUP);
-//pinMode(OLED_VCC,OUTPUT);
-//digitalWrite(OLED_VCC,HIGH);
-//pinMode(BUTTON,INPUT_PULLUP);
 attachInterrupt(digitalPinToInterrupt(PIN_A),encmove,CHANGE);  //call encmove()    when high->low or high->low changes happened
 attachInterrupt(digitalPinToInterrupt(PIN_B),encmove,CHANGE);
 encbtn.setClickHandler(btnhandler);
@@ -78,44 +97,30 @@ display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C
 display.clearDisplay();
 display.setTextSize(1);
 display.setTextColor(WHITE);
+display.setCursor(32,12);
+display.println("Loading...");
 display.display();
-Serial.begin(115200);
-setup_wifi();
+batlevel();
 client.setServer(mqtt_server, 1883);
 client.setCallback(callback);
 sleeper=millis();
 }//end of setup
 
-void setup_wifi() {
-delay(10);
-Serial.println();
-Serial.print("Connecting to ");
-Serial.println(ssid);
-WiFi.begin(ssid, password);
-while (WiFi.status() != WL_CONNECTED) { 
-delay(500);
-Serial.print(".");
-}
-Serial.println("");
-Serial.println("WiFi connected");
-Serial.println("IP address: ");
-Serial.println(WiFi.localIP());
-}//end of setupwifi
-
 void reconnect() {
-while (!client.connected()) {
-Serial.print("Attempting MQTT connection...");
 if (client.connect(mqtt_clientid, mqtt_username, mqtt_password)) {
-Serial.println("connected");
 client.subscribe(inTopic);
 } else {
 Serial.print("failed, rc=");
 Serial.print(client.state());
 Serial.println(" try again in 5 seconds");
+display.setCursor(0,0);//cursor
+display.println("MQTT connection failed.");
+display.display();
+display.clearDisplay();
 delay(5000);
-    }
-
-  }
+}
+Serial.println("connected");
+Serial.println(millis()-basla);
 }//end of reconnect
 
 void initdata(){//init data from HA -call is inside void reconnect()
@@ -150,20 +155,22 @@ client.publish(outTopic , data);
 outputchanged=0;
 }//end of outputhandler
 
-
 void loop() { //--------------------------------------------------void loop--------------------
-while (!client.connected()){
-  reconnect();
-  initdata();
-  }
+if(!client.connected()) {
+if (WiFi.status() == WL_CONNECTED){
+reconnect();
+if(client.connected()) initdata();
+}
+else{
+delay(10);
+Serial.print(".");
+}
+} //client if
 client.loop();
 encbtn.loop();
 if(initseq==0)screenhandler();
-if (millis()>600000+batcheck){batlevel();batcheck=millis();}
 if(outputchanged&&(lastupdatetimer<millis()-200)){outputhandler();lastupdatetimer=millis();}
 else {if(outputchanged&&slider[dispcursor]==100)outputhandler();if(outputchanged&&slider[dispcursor]==0)outputhandler();}
-//Serial.println(millis());
-//if (millis()>5000+sleeper){screensaver();sleeper=millis();}
 if (millis()>15000+sleeper){screensaver();sleeper=millis();}//deep sleep
 }//end of loop
 
@@ -265,21 +272,3 @@ break;
 }
 sleeper=millis();
 }//end of btnhandler
-
-void batlevel(){
-float raw = analogRead(A0);
-if(raw<=735){ // if bat is low display message
-display.setCursor(0,0);
-display.println("L");
-display.setCursor(0,0);
-display.println("B");
-display.setCursor(0,0);
-display.println("a");
-display.setCursor(0,0);
-display.println("t");
-display.display();
-  }//end if 
-String payload = "{\"bat\": "+ String(raw) + "}";
-payload.toCharArray(data2, (payload.length() + 1));
-client.publish( "kumanda1/bat", data2);
-} //end of batlevel
