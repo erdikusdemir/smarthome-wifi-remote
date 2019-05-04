@@ -13,12 +13,16 @@ JSON messages contain 3 messages. 1. The ID number of the item 2. state of the i
 Wemos chip falls in a deep sleep to reduce power consumption after 30 seconds of idle. Reset switch needs to be pressed to awaken the board again.
 
 Hardware is consist of;
-1. Wemos D1 mini,
+1. Wemos D1 mini Pro,
 2. A clickable rotary encoder,
 3. 0.96" I2C 128x64 OLED display,
 4. Wemos battery shield,
 5. LIPO battery,
 6. 3D printed enclosure (under progress),
+
+<img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/remote_sizing.jpg" width="400">
+<img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/remote_extended.jpg" width="400">
+<img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/remote_wemos.jpg" width="400">
 
 # Limitations:  
 The number of an item is fixed to 20 because of code restrictions. It can be changed inside the Arduino code.  
