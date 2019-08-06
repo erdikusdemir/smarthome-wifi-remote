@@ -17,11 +17,13 @@ Hardware is consist of;
 3. 0.96" I2C 128x64 OLED display,
 4. Wemos battery shield,
 5. LIPO battery,
-6. 3D printed enclosure (under progress),
+6. 3D printed enclosure (under progress),  
+7. TPS27081ADDCR load switch,  
+8. 2222A NPN transistor,  
+9. 330, 1 k, and 1 MOhm resistors.  
 
-<img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/remote_sizing.jpg" width="400">
-<img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/remote_extended.jpg" width="400">
-<img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/remote_wemos.jpg" width="400">
+<img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/remote_insidecover.jpg" width="400">
+<img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/Schematic.PNG" width="400">
 
 # Limitations:  
 The number of an item is fixed to 20 because of code restrictions. It can be changed inside the Arduino code.  
