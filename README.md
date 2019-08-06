@@ -29,15 +29,11 @@ Hardware is consist of;
 The number of an item is fixed to 20 because of code restrictions. It can be changed inside the Arduino code.  
 
 # Instructions:  
-1. Connect your encoder pins as:  
-ROTARY_PIN1  D6,  
-ROTARY_PIN2 D7,  
-BUTTON_PIN  D3,  
-2. Connect your I2C LCD to HW I2C port,  
-3.1. Open the Arduino sketch and update your wifi and MQTT server information,  
-3.2. Copy the libraries to documents/Arduino folder,  
-4.1. Copy NodeRed flow into your NodeRed server,  
-4.2. Configure your HA and MQTT servers,  
-4.3. Configure your items by editing "config file" function,  
-(id: order in your OLED screen, HAid: id name of item you want to control, svalid: is item dimmable?)  
+1. Follow the schematic,  
+2.1. Open the Arduino sketch and update your wifi and MQTT server information,  
+2.2. Copy the libraries to documents/Arduino folder,  
+3.1. Copy NodeRed flow into your NodeRed server,  
+3.2. Configure your HA and MQTT servers,  
+3.3. Configure your items by editing "config file" function,  
+(id: order in your OLED screen, HAid: id name of item you want to control, type: switch(0), dimmer(1), or temperature controller(2))  
 4.4. Deploy the node and everything should works.
