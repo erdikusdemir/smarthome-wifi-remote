@@ -22,7 +22,7 @@ Hardware is consist of;
 8. 2222A NPN transistor,  
 9. 330, 1 k, and 1 MOhm resistors.  
 
-<img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/remote_insidecover.jpg" width="400">
+
 <img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/Schematic.PNG" width="400">
 
 # Limitations:  
