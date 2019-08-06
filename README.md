@@ -1,16 +1,15 @@
 
 
 
-Sorry for poorly compiled description. I will update and make it easy to understand.  
+I am working on this project on left over times from my PhD thesis.
 
 # DESCRIPTION 
 
 Portable remote controller to control smart home devices over MQTT protocol. It is based on ESP8266 with OLED LCD and rotary encoder.
 
 The remote controller communicates with Node-Red flow by MQTT JSON messages. Node-Red flow converts the signals from both remote and HA side and makes implementation easier. Items you would like to control by remote can be edited by "config file" function. Arduino sketch only configures Wifi and MQTT settings. All the item information are called at the initialization stage of the remote.
-JSON messages contain 3 messages. 1. The ID number of the item 2. state of the item (on/off) 3. "slider" of the item if it is dimmable. 
 
-Wemos chip falls in a deep sleep to reduce power consumption after 30 seconds of idle. Reset switch needs to be pressed to awaken the board again.
+Wemos kill its power after 15 secs of idle time. Thus, power consumption of the remote is zero while it is unused. 
 
 Hardware is consist of;
 1. Wemos D1 mini Pro,
@@ -26,7 +25,6 @@ Hardware is consist of;
 
 # Limitations:  
 The number of an item is fixed to 20 because of code restrictions. It can be changed inside the Arduino code.  
-Temperature controlling is possible but not configured yet.
 
 # Instructions:  
 1. Connect your encoder pins as:  
