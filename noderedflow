@@ -1,109 +1,124 @@
 [
     {
-        "id": "75f0fa50.fe1b74",
+        "id": "dd1671e4.a95b4",
+        "type": "tab",
+        "label": "MQTT remote",
+        "disabled": false,
+        "info": "https://github.com/erdikusdemir/smarthome-wifi-remote"
+    },
+    {
+        "id": "397ec0cf.cb61d",
         "type": "mqtt in",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "kumanda1 payload in",
         "topic": "kumanda1/in",
         "qos": "0",
-        "broker": "91cf2ba5.2fd9c8",
-        "x": 300,
-        "y": 120,
+        "datatype": "auto",
+        "broker": "",
+        "x": 140,
+        "y": 180,
         "wires": [
             [
-                "e8b75a7a.f90fd8"
+                "1cd217f2.58d7a8"
             ]
         ]
     },
     {
-        "id": "e8b75a7a.f90fd8",
+        "id": "1cd217f2.58d7a8",
         "type": "json",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "",
         "property": "payload",
         "action": "",
         "pretty": false,
-        "x": 470,
-        "y": 120,
+        "x": 310,
+        "y": 180,
         "wires": [
             [
-                "b14c35c2.9a65b8"
+                "1dcdd871.a46d58"
             ]
         ]
     },
     {
-        "id": "b14c35c2.9a65b8",
+        "id": "1dcdd871.a46d58",
         "type": "function",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "shape remote in",
         "func": "if (msg.payload.id==99) return [null, msg]; \nreturn msg;",
         "outputs": 2,
         "noerr": 0,
-        "x": 620,
-        "y": 120,
+        "x": 460,
+        "y": 180,
         "wires": [
             [
-                "b9f511ae.8f232"
+                "13b39006.49cc2"
             ],
             [
-                "940a3524.d25e68"
+                "b447f254.9cd26"
             ]
         ]
     },
     {
-        "id": "d024c845.8a6248",
+        "id": "99787f31.35e7f",
         "type": "server-state-changed",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "",
-        "server": "a713c00a.edde8",
-        "entityidfilter": "light",
+        "server": "640a9cd6.647374",
+        "version": 1,
+        "entityidfilter": "light,switch,climate",
         "entityidfiltertype": "substring",
+        "outputinitially": false,
+        "state_type": "str",
         "haltifstate": "",
-        "x": 430,
-        "y": 300,
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 1,
+        "output_only_on_state_change": false,
+        "x": 180,
+        "y": 460,
         "wires": [
             [
-                "61f90c45.6674b4"
+                "cbc27622.7a3548"
             ]
         ]
     },
     {
-        "id": "47eef0db.1d9ae",
+        "id": "aed60855.1904c8",
         "type": "mqtt out",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "",
         "topic": "kumanda1/out",
         "qos": "0",
-        "retain": "false",
-        "broker": "91cf2ba5.2fd9c8",
-        "x": 1500,
-        "y": 300,
+        "retain": "true",
+        "broker": "",
+        "x": 1420,
+        "y": 480,
         "wires": []
     },
     {
-        "id": "e3f5f70a.79ad48",
+        "id": "470c16e1.fde8d8",
         "type": "range",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "minin": "0",
         "maxin": "254",
         "minout": "0",
         "maxout": "100",
         "action": "scale",
         "round": true,
-        "property": "payload.slider",
+        "property": "payload.value0",
         "name": "",
-        "x": 960,
-        "y": 300,
+        "x": 760,
+        "y": 440,
         "wires": [
             [
-                "7e7f02d8.49f55c"
+                "501adda.b28d724"
             ]
         ]
     },
     {
-        "id": "7e7f02d8.49f55c",
+        "id": "501adda.b28d724",
         "type": "change",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "",
         "rules": [
             {
@@ -132,6 +147,15 @@
                 "fromt": "str",
                 "to": "0",
                 "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload.state",
+                "pt": "msg",
+                "from": "heat",
+                "fromt": "str",
+                "to": "1",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -139,34 +163,37 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1120,
-        "y": 300,
+        "x": 940,
+        "y": 480,
         "wires": [
             [
-                "172a840c.890c6c"
+                "15458b9b.52bdd4"
             ]
         ]
     },
     {
-        "id": "beaa4246.f3193",
+        "id": "9b6e9db3.2aa07",
         "type": "function",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "shape remote out",
-        "func": "for (var i=0; i<msg.config.length;i++) {\nif(msg.topic==msg.config[i].HAid){\nmsg.payload = { id: msg.config[i].id, state: msg.data.new_state.state , slider: msg.data.new_state.attributes.brightness};\nreturn [msg];\n}\n}\n",
-        "outputs": 1,
+        "func": "for (var i=0; i<msg.config.length;i++) {\nif(msg.topic==msg.config[i].HAid){\n\nif(msg.config[i].type==2){//climate controller\nmsg.payload = { id: msg.config[i].id, state: msg.data.new_state.state , value0: msg.data.new_state.attributes.current_temperature, value1:msg.data.new_state.attributes.temperature};\n//msg.payload = { id: msg.config[i].id, state: msg.data.new_state.state , svalid:msg.data.new_state.attributes.current_temperature+msg.data.new_state.attributes.min_temp, slider: msg.data.new_state.attributes.temperature};\nreturn [null, msg];\n}\nelse{\nmsg.payload = { id: msg.config[i].id, state: msg.data.new_state.state , value0: msg.data.new_state.attributes.brightness};  \nreturn [msg];\n}\n\n}\n}\n",
+        "outputs": 2,
         "noerr": 0,
-        "x": 790,
-        "y": 300,
+        "x": 590,
+        "y": 460,
         "wires": [
             [
-                "e3f5f70a.79ad48"
+                "470c16e1.fde8d8"
+            ],
+            [
+                "501adda.b28d724"
             ]
         ]
     },
     {
-        "id": "940a3524.d25e68",
+        "id": "b447f254.9cd26",
         "type": "delay",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "",
         "pauseType": "delay",
         "timeout": "200",
@@ -178,88 +205,97 @@
         "randomLast": "5",
         "randomUnits": "seconds",
         "drop": false,
-        "x": 790,
-        "y": 180,
+        "x": 230,
+        "y": 300,
         "wires": [
             [
-                "b6e9f3f4.360f3"
+                "93579b79.6a6ea8"
             ]
         ]
     },
     {
-        "id": "b6e9f3f4.360f3",
+        "id": "93579b79.6a6ea8",
         "type": "function",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "config file",
-        "func": "msg.config =   [{ id: 0, HAid: \"light.salon\", name: \"Living Room\", svalid: 1},\n                { id: 1, HAid: \"light.mutfak\", name: \"Kitchen\", svalid: 1},\n                { id: 2, HAid: \"light.mutfak_yan\", name: \"Kitchen Side\", svalid: 0},\n                { id: 3, HAid: \"light.hall\", name: \"Hall\", svalid: 0},];\nmsg.loop= {counter:0, max:msg.config.length};\nreturn msg;",
+        "func": "//id is the number of the item on the screen of remote controller.\n//HAid is the name of the item on Home Assistant.\n//name is the name of the item on the screen of the remote controller.\n//type is the type of the item. 0: switch, 1: dimmer, 2: temperature controller\n\nmsg.config =   [{ id: 0, HAid: \"light.top\", name: \"Top\", type: 1},\n                { id: 1, HAid: \"light.sofa\", name: \"Sofa\", type: 1},\n                { id: 2, HAid: \"light.bed\", name: \"Bed\", type: 1},\n                { id: 3, HAid: \"light.table\", name: \"Table\", type: 1},\n                { id: 4, HAid: \"switch.pc_power\", name: \"Pc power\", type: 0},\n                { id: 5, HAid: \"switch.pj_bright_mode\", name: \"PJ bright\", type: 0},\n                { id: 6, HAid: \"climate.kombi\", name: \"Boiler\", type: 2},];\n                \n                \n                \nmsg.loop= {counter:0, max:msg.config.length};\nreturn msg;\n\n",
         "outputs": 1,
         "noerr": 0,
-        "x": 940,
-        "y": 180,
+        "x": 580,
+        "y": 300,
         "wires": [
             [
-                "efb626f8.bdf0b8"
+                "c95370b4.4f3b1"
             ]
         ]
     },
     {
-        "id": "93b0d266.9f2dc",
+        "id": "dcf307f7.ea07d8",
         "type": "api-current-state",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "",
-        "server": "a713c00a.edde8",
+        "server": "640a9cd6.647374",
+        "version": 1,
+        "outputs": 1,
         "halt_if": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
         "override_topic": false,
-        "override_payload": false,
         "entity_id": "",
-        "x": 820,
-        "y": 240,
+        "state_type": "str",
+        "state_location": "",
+        "override_payload": "none",
+        "entity_location": "data",
+        "override_data": "msg",
+        "blockInputOverrides": false,
+        "x": 740,
+        "y": 380,
         "wires": [
             [
-                "fa787452.8ba5d8"
+                "4b1129bd.9f0f88"
             ]
         ]
     },
     {
-        "id": "f964c831.916b08",
+        "id": "e69e1f52.8eaa5",
         "type": "function",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "ask HA",
         "func": "msg.payload = { entity_id: msg.config[msg.loop.counter-1].HAid};\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 660,
-        "y": 240,
+        "x": 580,
+        "y": 380,
         "wires": [
             [
-                "93b0d266.9f2dc"
+                "dcf307f7.ea07d8"
             ]
         ]
     },
     {
-        "id": "457ca024.bd4dc",
+        "id": "ef0bf5aa.ded408",
         "type": "range",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "minin": "0",
         "maxin": "254",
         "minout": "0",
         "maxout": "100",
         "action": "scale",
         "round": true,
-        "property": "payload.slider",
+        "property": "payload.value0",
         "name": "",
-        "x": 1160,
-        "y": 240,
+        "x": 1080,
+        "y": 360,
         "wires": [
             [
-                "ac3689e0.d19558"
+                "7a6f86e8.7a6248"
             ]
         ]
     },
     {
-        "id": "ac3689e0.d19558",
+        "id": "7a6f86e8.7a6248",
         "type": "change",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "",
         "rules": [
             {
@@ -293,6 +329,15 @@
                 "t": "delete",
                 "p": "topic",
                 "pt": "msg"
+            },
+            {
+                "t": "change",
+                "p": "payload.state",
+                "pt": "msg",
+                "from": "heat",
+                "fromt": "str",
+                "to": "1",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -300,131 +345,137 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1320,
-        "y": 240,
+        "x": 1240,
+        "y": 400,
         "wires": [
             [
-                "47eef0db.1d9ae",
-                "6e5a1bbb.03aed4"
+                "aed60855.1904c8",
+                "d84e57d2.8971e8"
             ]
         ]
     },
     {
-        "id": "fa787452.8ba5d8",
+        "id": "4b1129bd.9f0f88",
         "type": "function",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "shape message",
-        "func": "msg.payload = { id: msg.loop.counter-1,name:msg.config[msg.loop.counter-1].name, state: msg.data.state , slider: msg.data.attributes.brightness, svalid:msg.config[msg.loop.counter-1].svalid, mid:msg.config.length};\nreturn msg;",
-        "outputs": 1,
+        "func": "if(msg.config[msg.loop.counter-1].type==2){\nmsg.payload = { id: msg.loop.counter-1 , name:msg.config[msg.loop.counter-1].name, state: msg.data.state ,type:msg.config[msg.loop.counter-1].type, value0: msg.data.attributes.current_temperature, value1:msg.data.attributes.temperature, mid:msg.config.length};\nreturn [null, msg];\n}\nelse{\nmsg.payload = { id: msg.loop.counter-1,name:msg.config[msg.loop.counter-1].name, state: msg.data.state , value0: msg.data.attributes.brightness, type:msg.config[msg.loop.counter-1].type, mid:msg.config.length};\nreturn msg;\n}\n\n\n//msg.payload = { id: msg.loop.counter-1,name:msg.config[msg.loop.counter-1].name, state: msg.data.state , slider: msg.data.attributes.brightness, svalid:msg.config[msg.loop.counter-1].svalid, mid:msg.config.length};\n//return msg;",
+        "outputs": 2,
         "noerr": 0,
-        "x": 1000,
-        "y": 240,
+        "x": 920,
+        "y": 380,
         "wires": [
             [
-                "457ca024.bd4dc"
+                "ef0bf5aa.ded408"
+            ],
+            [
+                "7a6f86e8.7a6248"
             ]
         ]
     },
     {
-        "id": "6e5a1bbb.03aed4",
+        "id": "d84e57d2.8971e8",
         "type": "function",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "looper",
         "func": "if(msg.loop.counter <= msg.loop.max-1)\n{\nmsg.loop={counter: msg.loop.counter+1, max:msg.loop.max};\nreturn msg;\n}",
         "outputs": 1,
         "noerr": 0,
-        "x": 1350,
-        "y": 180,
+        "x": 1190,
+        "y": 300,
         "wires": [
             [
-                "f964c831.916b08"
+                "e69e1f52.8eaa5"
             ]
         ]
     },
     {
-        "id": "efb626f8.bdf0b8",
+        "id": "c95370b4.4f3b1",
         "type": "function",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "set config to flow",
         "func": "flow.set(\"config\",msg.config);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1110,
-        "y": 180,
+        "x": 990,
+        "y": 300,
         "wires": [
             [
-                "6e5a1bbb.03aed4"
+                "d84e57d2.8971e8"
             ]
         ]
     },
     {
-        "id": "b9f511ae.8f232",
+        "id": "13b39006.49cc2",
         "type": "function",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "flow returner",
         "func": "msg.config = flow.get(\"config\");\nflow.set(\"lastmessage\",msg.payload);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 790,
-        "y": 120,
+        "x": 630,
+        "y": 180,
         "wires": [
             [
-                "71617d75.a98f44"
+                "6e7ab82.d7eb048"
             ]
         ]
     },
     {
-        "id": "61f90c45.6674b4",
+        "id": "cbc27622.7a3548",
         "type": "function",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "flow returner",
         "func": "msg.config = flow.get(\"config\");\nmsg.lastmessage = flow.get(\"lastmessage\");\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 610,
-        "y": 300,
+        "x": 410,
+        "y": 460,
         "wires": [
             [
-                "beaa4246.f3193"
+                "9b6e9db3.2aa07"
             ]
         ]
     },
     {
-        "id": "172a840c.890c6c",
+        "id": "15458b9b.52bdd4",
         "type": "function",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "feedback destroyer",
-        "func": "if(msg.payload.state!=msg.lastmessage.state&&msg.payload.slider!=msg.lastmessage.slider) return msg;",
+        "func": "if(msg.payload.state!=msg.lastmessage.state&&msg.payload.value0!=msg.lastmessage.value0) return msg;",
         "outputs": 1,
         "noerr": 0,
-        "x": 1310,
-        "y": 300,
+        "x": 1130,
+        "y": 480,
         "wires": [
             [
-                "47eef0db.1d9ae"
+                "aed60855.1904c8"
             ]
         ]
     },
     {
-        "id": "1ee82b7c.223e65",
+        "id": "e6b16670.8737a8",
         "type": "api-call-service",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "",
-        "server": "a713c00a.edde8",
+        "server": "640a9cd6.647374",
         "service_domain": "homeassistant",
         "service": "{}",
         "data": "{}",
         "mergecontext": "",
-        "x": 1300,
-        "y": 120,
+        "output_location": "payload",
+        "output_location_type": "msg",
+        "mustacheAltTags": false,
+        "x": 1140,
+        "y": 140,
         "wires": [
             []
         ]
     },
     {
-        "id": "2c4ca21e.1502ae",
+        "id": "20b9c7a7.79ed48",
         "type": "range",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "minin": "0",
         "maxin": "100",
         "minout": "0",
@@ -433,59 +484,143 @@
         "round": true,
         "property": "payload.data.brightness",
         "name": "",
-        "x": 1120,
-        "y": 120,
+        "x": 960,
+        "y": 140,
         "wires": [
             [
-                "1ee82b7c.223e65"
+                "e6b16670.8737a8"
             ]
         ]
     },
     {
-        "id": "71617d75.a98f44",
+        "id": "6e7ab82.d7eb048",
         "type": "function",
-        "z": "856f89d1.cf82d8",
+        "z": "dd1671e4.a95b4",
         "name": "shape message",
-        "func": "if(msg.payload.state) msg.payload = { service: \"turn_on\", data: {\"entity_id\": msg.config[msg.payload.id].HAid,\"brightness\": msg.payload.slider } };\nelse msg.payload = { service: \"turn_off\", data: {\"entity_id\": msg.config[msg.payload.id].HAid} };\nreturn msg;",
+        "func": "//if(msg.payload.state) msg.payload = { service: \"turn_on\", data: {\"entity_id\": msg.config[msg.payload.id].HAid,\"brightness\": msg.payload.slider } };\n//else msg.payload = { service: \"turn_off\", data: {\"entity_id\": msg.config[msg.payload.id].HAid} };\n//return msg;\n\n\nif(msg.config[msg.payload.id].type==2){\n//msg.payload = { id: msg.loop.counter-1 , name:msg.config[msg.loop.counter-1].name, state: msg.data.state , slider: msg.data.new_state.attributes.temperature, svalid:msg.data.new_state.attributes.current_temperature, mid:msg.config.length};\nif(msg.payload.state) msg.payload = { service: \"set_temperature\", data: {\"entity_id\": msg.config[msg.payload.id].HAid, \"temperature\": msg.payload.value1 } };\nelse msg.payload = { service: \"turn_off\", data: {\"entity_id\": msg.config[msg.payload.id].HAid}, \"hvac_mode\":\"off\" };\nreturn [null, msg];\n}\nelse{\nif(msg.payload.state) msg.payload = { service: \"turn_on\", data: {\"entity_id\": msg.config[msg.payload.id].HAid,\"brightness\": msg.payload.value0 } };\nelse msg.payload = { service: \"turn_off\", data: {\"entity_id\": msg.config[msg.payload.id].HAid} };\nreturn msg;\n}\n\n",
+        "outputs": 2,
+        "noerr": 0,
+        "x": 800,
+        "y": 180,
+        "wires": [
+            [
+                "20b9c7a7.79ed48"
+            ],
+            [
+                "48ee32de.17ad6c"
+            ]
+        ]
+    },
+    {
+        "id": "48ee32de.17ad6c",
+        "type": "api-call-service",
+        "z": "dd1671e4.a95b4",
+        "name": "",
+        "server": "640a9cd6.647374",
+        "service_domain": "climate",
+        "service": "",
+        "data": "",
+        "mergecontext": "",
+        "output_location": "payload",
+        "output_location_type": "msg",
+        "mustacheAltTags": false,
+        "x": 970,
+        "y": 200,
+        "wires": [
+            [
+                "4a4cce09.4093b"
+            ]
+        ]
+    },
+    {
+        "id": "4a4cce09.4093b",
+        "type": "function",
+        "z": "dd1671e4.a95b4",
+        "name": "turn on climate",
+        "func": "if(msg.payload.service==\"set_temperature\"){\nmsg.payload = { service: \"turn_on\", data: {\"entity_id\": msg.payload.data.entity_id} };\nreturn msg;\n}",
         "outputs": 1,
         "noerr": 0,
-        "x": 960,
-        "y": 120,
+        "x": 1140,
+        "y": 200,
         "wires": [
             [
-                "2c4ca21e.1502ae"
+                "22e0bc41.61a2e4"
             ]
         ]
     },
     {
-        "id": "91cf2ba5.2fd9c8",
-        "type": "mqtt-broker",
-        "z": "",
-        "name": "mqtt_server",
-        "broker": "yourmqttserver",
-        "port": "1883",
-        "clientid": "nodered",
-        "usetls": false,
-        "compatmode": true,
-        "keepalive": "60",
-        "cleansession": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": "",
-        "closeTopic": "",
-        "closeQos": "0",
-        "closePayload": "",
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": ""
+        "id": "22e0bc41.61a2e4",
+        "type": "api-call-service",
+        "z": "dd1671e4.a95b4",
+        "name": "",
+        "server": "640a9cd6.647374",
+        "service_domain": "climate",
+        "service": "",
+        "data": "",
+        "mergecontext": "",
+        "output_location": "payload",
+        "output_location_type": "msg",
+        "mustacheAltTags": false,
+        "x": 1310,
+        "y": 200,
+        "wires": [
+            []
+        ]
     },
     {
-        "id": "a713c00a.edde8",
+        "id": "5e4bbede.f8981",
+        "type": "comment",
+        "z": "dd1671e4.a95b4",
+        "name": "ReadME!",
+        "info": "1) Please update MQTT and HA asistant data on commented places.\n2) Change the config file according to your willing.\n3) Deploy",
+        "x": 580,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "8d895d1.666baa",
+        "type": "comment",
+        "z": "dd1671e4.a95b4",
+        "name": "Change this!",
+        "info": "",
+        "x": 110,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "397517b9.f3aa78",
+        "type": "comment",
+        "z": "dd1671e4.a95b4",
+        "name": "Change this!",
+        "info": "",
+        "x": 1110,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "275b15a0.fbfbaa",
+        "type": "comment",
+        "z": "dd1671e4.a95b4",
+        "name": "Change this!",
+        "info": "",
+        "x": 1410,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "106700dd.10a02f",
+        "type": "comment",
+        "z": "dd1671e4.a95b4",
+        "name": "Change this!",
+        "info": "",
+        "x": 590,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "640a9cd6.647374",
         "type": "server",
         "z": "",
-        "name": "Home Assistant",
-        "url": "yourHAip",
-        "pass": "",
-        "llat": ""
+        "name": "Home Assistant"
     }
 ]
