@@ -26,9 +26,6 @@ Hardware is consist of;
 <img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/remote_insidecover.jpg" width="600">
 <img src="https://github.com/erdikusdemir/smarthome-wifi-remote/blob/master/Schematic.PNG" width="800">
 
-# Limitations:  
-The number of an item is fixed to 20 because of code restrictions. It can be changed inside the Arduino code.  
-
 # Instructions:  
 1. Follow the schematic,  
 2.1. Open the Arduino sketch and update your wifi and MQTT server information,  
@@ -37,4 +34,14 @@ The number of an item is fixed to 20 because of code restrictions. It can be cha
 3.2. Configure your HA and MQTT servers,  
 3.3. Configure your items by editing "config file" function,  
 (id: order in your OLED screen, HAid: id name of item you want to control, type: switch(0), dimmer(1), or temperature controller(2))  
-4.4. Deploy the node and everything should works.
+4.4. Deploy the node and everything should works.  
+
+# To do list:
+Sometimes, during booting, remote can not collect the Json messages from Node-red and creates a blank page.  
+Button of the encoder can not sense fast pushes. Cycle of the main loop is not fast enough. I will try interrupt.
+Case design is too bulky.
+
+# Limitations:  
+The number of an item is fixed to 20 because of code restrictions but it is possible to increase inside the Arduino code.  
+
+
