@@ -47,7 +47,7 @@ byte currValueAB;
 byte prevValueAB;
 int counter=0;
 
-const size_t bufferSize = JSON_OBJECT_SIZE(4) + 70;
+const size_t bufferSize = JSON_OBJECT_SIZE(7) + 70;
 DynamicJsonBuffer JSONBuffer(bufferSize);
 
 #define OLED_RESET -1
