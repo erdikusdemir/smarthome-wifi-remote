@@ -38,7 +38,7 @@ Hardware is consist of;
 
 # To do list:
 1. (done!) Sometimes, during booting, remote can not collect the Json messages from Node-red and creates a blank page. (Json buffer size mistake.)  
-2. Button of the encoder can not sense fast pushes. Cycle of the main loop is not fast enough. I will try interrupt.  
+2. (done!) Button of the encoder can not sense fast pushes. Cycle of the main loop is not fast enough.(Interrupt implemented.)  
 3. Case is too bulky.
 
 # Limitations:  
