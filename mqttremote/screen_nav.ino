@@ -1,4 +1,3 @@
-
 void screenhandler(){
 if(dispcursor==-1)page=-1;
 else page=dispcursor/4;
@@ -65,42 +64,45 @@ sleeper=millis();
 }//end of encoder move
 
 void dispcursorupdate(int incdec) {
-if(mainmenu){ //artı gidisler
-dispcursor=dispcursor+incdec;
-if(dispcursor<-1)dispcursor=-1;
-if(dispcursor>=mid)dispcursor=mid;
+  if(mainmenu){ //artı gidisler
+  dispcursor=dispcursor+incdec;
+  if(dispcursor<-1)dispcursor=-1;
+  if(dispcursor>=mid)dispcursor=mid;
 }
 else {
   if(type[dispcursor]==2){ //value1 is a set temp
-value1[dispcursor]=value1[dispcursor]+incdec;
-if(value1[dispcursor]<18)value1[dispcursor]=18;
-if(value1[dispcursor]>30)value1[dispcursor]=30;
-  }//end if temp
- if(type[dispcursor]==1){// value0 is set dimmer
-value0[dispcursor]=value0[dispcursor]+10*incdec;
-if(value0[dispcursor]<0)value0[dispcursor]=0;
-if(value0[dispcursor]>100)value0[dispcursor]=100;
+  value1[dispcursor]=value1[dispcursor]+incdec;
+  if(value1[dispcursor]<18)value1[dispcursor]=18;
+  if(value1[dispcursor]>30)value1[dispcursor]=30;
+  }//end if temp 
+  if(type[dispcursor]==1){// value0 is set dimmer
+  value0[dispcursor]=value0[dispcursor]+10*incdec;
+  if(value0[dispcursor]<0)value0[dispcursor]=0;
+  if(value0[dispcursor]>100)value0[dispcursor]=100;
   }//end if dimmer
 outputchanged=1;
 }//end else
 }//end of dispcursorupdate
 
+void btnintr()
+{
+  noInterrupts();
+  now =millis();      // get current time
+  if (now - lastbouncetime > debouncetime )
+  {
+  btnpressed = HIGH;
+  clickcount++;
+  }
+  lastbouncetime = now;
+  interrupts();
+}//end of btnintr
+
 void btnupdate()
 {
- now =millis();      // get current time
- btnstate = digitalRead(encbtn);  // current appearant button state
-  // If the switch changed, due to noise or a button press, reset the debounce timer
-  if (btnstate != laststate) lastbouncetime = now;
-  // debounce the button (Check if a stable, changed state has occured)
-  if (now - lastbouncetime > debouncetime && btnstate != btnpressed)
+  now =millis();      // get current time
+  if (btnpressed && (now - lastbouncetime) > multiclicktime)
   {
-    btnpressed = btnstate;
-    if (btnpressed) clickcount++;
-  }
-  laststate = btnstate;
-  // If the button released state is stable, report nr of clicks and start new cycle
-  if (!btnpressed && (now - lastbouncetime) > multiclicktime)
-  {
+  btnpressed=0;
     if(clickcount != 0) 
     {
       //click sayısı kadar işlem yap
@@ -120,19 +122,20 @@ void btnupdate()
     mainmenu=!mainmenu;
     }
     }
-      clickcount=0;
-      sleeper=millis();
+    clickcount=0;
+    sleeper=millis();
     }
   }
 
   // Check for "long click"
   if (btnpressed && (now - lastbouncetime > longclicktime))
   {
-if(clickcount != 0) 
-{
-//do sth for long click
-}
-clickcount=0;
+  if(clickcount != 0) 
+  {
+  //do sth for long click
   }
-
+  clickcount=0;
+  btnpressed=0;
+  }
+  
 }//btnupdate

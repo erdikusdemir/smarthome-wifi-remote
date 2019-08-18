@@ -37,8 +37,8 @@ bool laststate = LOW;
 bool btnpressed= LOW;
 unsigned long now = 0;
 unsigned long lastbouncetime =0;
-int debouncetime = 20;
-int multiclicktime =200;
+int debouncetime = 150;
+int multiclicktime =400;
 int longclicktime = 1000;
 int clickcount = 0;
 int clickcluck = 0;
@@ -47,9 +47,10 @@ byte currValueAB;
 byte prevValueAB;
 int counter=0;
 
-const size_t bufferSize = JSON_OBJECT_SIZE(7) + 70;
-DynamicJsonBuffer JSONBuffer(bufferSize);
 
+StaticJsonBuffer<2000> JSONBuffer;
+//const size_t bufferSize = JSON_OBJECT_SIZE(7) + 70;
+//DynamicJsonBuffer JSONBuffer(bufferSize);
 #define OLED_RESET -1
 #define OLED_VCC D3
 Adafruit_SSD1306 display(OLED_RESET);
@@ -105,6 +106,7 @@ pinMode(PIN_B,INPUT_PULLUP);
 attachInterrupt(digitalPinToInterrupt(PIN_A),encmove,CHANGE);  //call encmove()    when high->low or high->low changes happened
 attachInterrupt(digitalPinToInterrupt(PIN_B),encmove,CHANGE);
 pinMode(encbtn, INPUT);
+attachInterrupt(digitalPinToInterrupt(encbtn),btnintr,FALLING);
 display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3C (for the 128x64)
 //display.begin(SSD1306, 0x3C);
 display.clearDisplay();
