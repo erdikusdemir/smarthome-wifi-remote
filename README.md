@@ -37,7 +37,7 @@ Hardware is consist of;
 4.4. Deploy the node and everything should works.  
 
 # To do list:
-1. (done!) Sometimes, during booting, remote can not collect the Json messages from Node-red and creates a blank page. (Json buffer size mistake.)  
+1. Sometimes, during booting, remote can not collect the Json messages from Node-red and creates a blank page. Apperently, during the allocation of the memory, ESP has a problem to allocate big chunk of memory at once.   
 2. (done!) Button of the encoder can not sense fast pushes. Cycle of the main loop is not fast enough.(Interrupt implemented.)  
 3. Case is too bulky.
 
